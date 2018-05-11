@@ -3,13 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>demo</title>
+    <link rel="stylesheet" href="style/base.css">
 </head>
 <body>
+<div></div>
 
 <script src="http://lib.baomitu.com/jquery/2.2.4/jquery.js"></script>
-<script src="lib/grammar.parser.min.js"></script>
+<script src="js/grammar/grammar.parser.min.js"></script>
+<script src="js/ace/ace.js"></script>
+<script src="js/ace/ext-language_tools.js"></script>
 <script>
-    var gp = new GrammarParser({type:'jsonic',publicPath:'./lib'});
+    var gp = new GrammarParser({type:'jsonic',publicPath:'./js'});
+
+
+    /*示例代码(dns回查)
+    domain:www.baidu.com
+    */
+    /*示例代码(ip查询)
+    ip:8.8.8.8,192.168.6.6
+    */
+
+    /*示例代码(特征值回查)
+    feature={srcIp:"59.151.108.80"  &&  dstIp:"202.103.149.213"};
+    packet={ipsession:"192.168.5.1<->192.168.5.2"};
+    示例代码2(特征回查)
+    feature={(content:"feature[ascii:propfind]"  &&  protocol:"tcp,udp") ||  (content:"feature[ascii:PROPFIND]"  &&  protocol:"tcp,udp")};
+    packet={app:"alpemix,itv-player" && ipsession:"192.168.5.1<->192.168.5.2" && tcpsession:"[192.168.0.5]:28084<->[192.168.0.6]:80" || ip:"192.16.1.1"};
+    */
+
+    /*示例代码(行为回查)
+    a0={"protocol":"tcp","condition":"session.payload.find(|55 73 65 72 2D 41 67 65 6E 74 3A 20 4B 4A 77 30 72 6D|)","header":"[any]:[any]->[any]:[1010]","type":"flow"};
+    exp={"netobj":"a0","condition":"","type":"custom"}
+    */
 </script>
 </body>
 </html>

@@ -1,7 +1,137 @@
 @charset "UTF-8";
-*{margin: 0;padding: 0}
+*{margin: 0;padding: 0;box-sizing: border-box;}
 body{
     background: #fafafa;
     font-family: "Microsoft YaHei",sans-serif;
     font-size: 14px;
+}
+.content{
+    position: relative;
+    width: 900px;
+    margin: 2rem auto;
+}
+
+.editorTipBox{
+    position: absolute;
+    right: 5px;
+    top: 0;
+    min-width: 357px;
+    width: 64%;
+    height: 400px;
+    padding: 0 20px 20px 10px;
+    overflow-y: auto;
+    background: #3d3d3d;
+    border-radius: 2px 0 0 2px;
+    transition: right 500ms;
+}
+.editorTipBox .no-result{
+    color: #aaa;
+    text-align: center;
+    line-height: 50px;
+}
+.editorTipBox .item{
+    margin-top: 1rem;
+}
+.editorTipBox .item .title{
+    color: #fff;
+    font-size: 18px;
+}
+.editorTipBox .item .title span{
+    color: rgba(255,255,255,.4);
+    font-size: 1rem;
+    margin-left: 5px;
+}
+.editorTipBox .sub-item{margin-top: 10px;padding-left: 1rem;}
+.editorTipBox .sub-item .sub-title{
+    color: rgba(255,255,255,.8);
+    font-size: 1rem;
+}
+.editorTipBox .sub-item .sub-desc{
+    color: rgba(255,255,255,.5);
+    font-size: 12px;
+    margin-top: .3rem;
+    line-height: 16px;
+    white-space: pre-line;
+    word-break: break-all;
+}
+
+.editor-box{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 600px;
+    height: 400px;
+    z-index: 2;
+    background: #363636;
+    padding: 20px 1rem 20px 5px;
+    border-radius: 2px;
+}
+
+#editor{
+    height: 100%;
+    font-size: 16px;
+    background: transparent;
+    color: #fff;
+}
+
+.ace_autocomplete{
+    z-index: 19891016!important;
+    width: 320px!important;
+    background: #eee!important;
+    border: none!important;
+    box-shadow: 0 2px 8px rgba(0,0,0,.55)!important;
+    font-size: 1rem;
+    line-height: 26px!important;
+}
+.ace_autocomplete .ace_text-layer{
+    font-family: "Microsoft YaHei", "Arial Black", Gadget, sans-serif;
+}
+.ace_autocomplete .ace_marker-layer .ace_active-line {
+    background-color: rgba(55, 110, 255, 1)!important;
+    font-family: "Microsoft YaHei"!important;
+    z-index: 1;
+}
+.ace_autocomplete .ace_rightAlignedText{
+    right: 4px;
+}
+.ace_autocomplete .ace_selected span{
+    color: #fff!important;
+}
+.ace_autocomplete .ace_line span{
+    font-size: 12px!important;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+.ace_autocomplete .ace_rightAlignedText span{
+    display: inline;
+}
+.ace_print-margin{background:none!important;}
+.ace-tm .ace_cursor {
+    color: #fff!important;
+}
+.ace-tm .ace_marker-layer .ace_active-line {
+    background: rgba(255, 255, 255, .07);
+}
+.ace_keyword{color: #5fdfff!important;}
+.ace_number{color: #fffd64!important;}
+.ace_symbol{color: #ff3c82;}
+.editorBox .ace_string{color: #fff!important;}
+.ace_notes{
+    color: #abada6!important;
+    font-family: Monaco, Menlo, "Ubuntu Mono", Consolas, "Microsoft YaHei";
+}
+.ace-tm .ace_marker-layer .ace_selected-word {
+    background: rgba(250, 250, 255, .3)!important;
+}
+.ace-tm .ace_marker-layer .ace_selection {
+    background: rgba(181, 213, 255,.5)!important;
+}
+.ace_text-input:focus{opacity: 0;}
+.ace_gutter{
+    background: rgba(0,0,0,.1)!important;
+}
+.ace_gutter-cell{
+    color: #999;
+}
+.ace_gutter-active-line{
+    background: rgba(0,0,0,.1)!important;
 }

@@ -5,36 +5,78 @@
     <title>demo</title>
     <link rel="stylesheet" href="style/base.css">
 </head>
-<body>
-<div></div>
+<body ng-app="mainApp">
+<div class="content" ng-controller="mainCtr">
+    <div class="editor-box">
+        <div id="editor"></div>
+    </div>
+    <div class="editorTipBox"></div>
+</div>
 
+
+<script src="js/angular.min.js"></script>
 <script src="http://lib.baomitu.com/jquery/2.2.4/jquery.js"></script>
 <script src="js/grammar/grammar.parser.min.js"></script>
-<!--<script src="js/ace/ace.js"></script>-->
+<script src="js/ace/ace.js"></script>
 <script src="js/ace/ext-language_tools.js"></script>
 <script>
-    var gp = new GrammarParser({type:'jsonic',publicPath:'./js'});
+    let app = angular.module('mainApp',[]);
 
 
-    /*示例代码(dns回查)
-    domain:www.baidu.com
-    */
-    /*示例代码(ip查询)
-    ip:8.8.8.8,192.168.6.6
-    */
+    app.controller('mainCtr',function ($scope,editorUtil) {
+        $scope.editorMode = {
+            editor:null,
+            init(){
+                this.editor = editorUtil.init('editor');
+            }
+        };
 
-    /*示例代码(特征值回查)
-    feature={srcIp:"59.151.108.80"  &&  dstIp:"202.103.149.213"};
-    packet={ipsession:"192.168.5.1<->192.168.5.2"};
-    示例代码2(特征回查)
-    feature={(content:"feature[ascii:propfind]"  &&  protocol:"tcp,udp") ||  (content:"feature[ascii:PROPFIND]"  &&  protocol:"tcp,udp")};
-    packet={app:"alpemix,itv-player" && ipsession:"192.168.5.1<->192.168.5.2" && tcpsession:"[192.168.0.5]:28084<->[192.168.0.6]:80" || ip:"192.16.1.1"};
-    */
+        $scope.editorMode.init();
+    });
 
-    /*示例代码(行为回查)
-    a0={"protocol":"tcp","condition":"session.payload.find(|55 73 65 72 2D 41 67 65 6E 74 3A 20 4B 4A 77 30 72 6D|)","header":"[any]:[any]->[any]:[1010]","type":"flow"};
-    exp={"netobj":"a0","condition":"","type":"custom"}
-    */
+
+    app.service('editorUtil',function () {
+        return {
+            editor:null,
+            gp:null,
+            init(selector){
+                this.gp =  new GrammarParser({type:'lucene',publicPath:'./js'});
+
+                this.editor = ace.edit(selector);
+                this.editor.$blockScrolling = Infinity;
+                this.editor.setOptions({wrap:'free',enableBasicAutocompletion: true, enableSnippets: true, enableLiveAutocompletion: true});
+                this.editor.getSession().setMode('ace/mode/customJson');
+
+                var langTools = ace.require("ace/ext/language_tools");
+
+                this.editor.getSession().on('change',(evt,session) => {
+                    let content = session.doc.$lines.join('\n');
+                    let result = this.gp.parse(content);
+                    if(result.success){
+                        //校验成功
+                        console.log(result.res)
+                        this.editor.getSession().setAnnotations([]);
+                    }else {
+                        let row = evt.end.row;
+                        if(evt.action !== 'insert')
+                            row = evt.start.row;
+                        this.showErrorInfo(result.error,row);
+                    }
+                });
+
+                return editor;
+            },
+            showErrorInfo(e,row){
+                this.editor.getSession().setAnnotations([{
+                    row:row,
+                    column:0,
+                    text:e.name + '\n' + e.message,
+                    type:'error'
+                }]);
+            }
+        }
+    });
+
 </script>
 </body>
 </html>

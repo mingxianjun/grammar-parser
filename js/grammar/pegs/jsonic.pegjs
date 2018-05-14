@@ -13,7 +13,7 @@
 
 start
   = _ object:object { return object; }
-  / _ array:array   { return array; }
+  /*/ _ array:array   { return array; }*/
 
 object
   = "{" _ "}" _                 { return {};      }

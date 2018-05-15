@@ -54,7 +54,7 @@
                     let result = this.gp.parse(content);
                     if(result.success){
                         //校验成功
-                        console.log(result.res)
+                        console.log(result.res);
                         this.editor.getSession().setAnnotations([]);
                     }else {
                         let row = evt.end.row;

@@ -48,6 +48,7 @@
                 this.editor.getSession().setMode('ace/mode/customJson');
 
                 var langTools = ace.require("ace/ext/language_tools");
+                // langTools.autocomplete
 
                 this.editor.getSession().on('change',(evt,session) => {
                     let content = session.doc.$lines.join('\n');

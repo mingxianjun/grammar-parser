@@ -1,77 +1,3 @@
-/*
- * Lucene Query Grammar for PEG.js
- * ========================================
- *
- * This grammar supports many of the constructs contained in the Lucene Query Syntax.
- *
- * Supported features:
- * - conjunction operators (AND, OR, ||, &&, NOT, !)
- * - prefix operators (+, -)
- * - quoted values ("foo bar")
- * - named fields (foo:bar)
- * - range expressions (foo:[bar TO baz], foo:{bar TO baz})
- * - proximity search expressions ("foo bar"~5)
- * - boost expressions (foo^5, "foo bar"^5)
- * - fuzzy search expressions (foo~, foo~0.5)
- * - parentheses grouping ( (foo OR bar) AND baz )
- * - field groups ( foo:(bar OR baz) )
- *
- * The grammar will create a parser which returns an AST for the query in the form of a tree
- * of nodes, which are dictionaries. There are three basic types of expression dictionaries:
- *
- * A node expression generally has the following structure:
- *
- * {
- *     'left' : dictionary,     // field expression or node
- *     'operator': string,      // operator value
- *     'right': dictionary,     // field expression OR node
- *     'field': string          // field name (for field group syntax) [OPTIONAL]
- * }
- *
- *
- * A field expression has the following structure:
- *
- * {
- *     'field': string,         // field name
- *     'term': string,          // term value
- *     'prefix': string         // prefix operator (+/-) [OPTIONAL]
- *     'boost': float           // boost value, (value > 1 must be integer) [OPTIONAL]
- *     'similarity': float      // similarity value, (value must be > 0 and < 1) [OPTIONAL]
- *     'proximity': integer     // proximity value [OPTIONAL]
- * }
- *
- *
- * A range expression has the following structure:
- *
- * {
- *     'field': string,         // field name
- *     'term_min': string,      // minimum value (left side) of range
- *     'term_max': string,      // maximum value (right side) of range
- *     'inclusive': boolean     // inclusive ([...]) or exclusive ({...})
- * }
- *
- * Other Notes:
- *
- * - For any field name, unnamed/default fields will have the value "<implicit>".
- * - Wildcards (fo*, f?o) and fuzzy search modifiers (foo~.8) will be part of the term value.
- * - Escaping is not supported and generally speaking, will break the parser.
- * - Conjunction operators that appear at the beginning of the query violate the logic of the
- *   syntax, and are currently "mostly" ignored. The last element will be returned.
- *
- *   For example:
- *       Query: OR
- *       Return: { "operator": "OR" }
- *
- *       Query: OR AND
- *       Return: { "operator": "AND" }
- *
- *       Query: OR AND foo
- *       Return: { "left": { "field": "<implicit>", "term": "foo" } }
- *
- *  To test the grammar, use the online parser generator at http://pegjs.majda.cz/online
- *
- */
-
 start
   = _* node:node+
     {
@@ -349,11 +275,11 @@ operator_exp
 
 operator
   = 'OR'
-  / 'or'
+  / 'or' { return 'OR'; }
   / 'AND'
-  / 'and'
+  / 'and' { return 'AND'; }
   / 'NOT'
-  / 'not'
+  / 'not' { return 'NOT'}
   / '||' { return 'OR'; }
   / '&&' { return 'AND'; }
   / '!' { return 'NOT'}

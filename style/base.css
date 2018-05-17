@@ -7,16 +7,14 @@ body{
 }
 .content{
     position: relative;
-    width: 900px;
-    margin: 2rem auto;
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
 }
 
 .editorTipBox{
-    position: absolute;
-    right: 5px;
-    top: 0;
-    min-width: 357px;
-    width: 64%;
+    float: right;
+    width: 580px;
     height: 400px;
     padding: 0 20px 20px 10px;
     overflow-y: auto;
@@ -56,9 +54,7 @@ body{
 }
 
 .editor-box{
-    position: absolute;
-    right: 0;
-    top: 0;
+    float: left;
     width: 600px;
     height: 400px;
     z-index: 2;
@@ -113,6 +109,7 @@ body{
 }
 .ace_keyword{color: #5fdfff!important;}
 .ace_number{color: #fffd64!important;}
+.ace_string{color: #FFF!important;}
 .ace_symbol{color: #ff3c82;}
 .editorBox .ace_string{color: #fff!important;}
 .ace_notes{
@@ -134,4 +131,27 @@ body{
 }
 .ace_gutter-active-line{
     background: rgba(0,0,0,.1)!important;
+}
+
+
+/*------webkit 滚动条---------*/
+.webkitScrollbar::-webkit-scrollbar{
+    width: 6px;
+    height: 6px;
+    background-color: rgba(0,0,0,.12);
+    border-radius: 6px;
+}
+/*定义滚动条的轨道，内阴影及圆角*/
+.webkitScrollbar::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    border-radius: 6px;
+    background-color: rgba(255,255,255,.8);;
+}
+/*定义滑块，内阴影及圆角*/
+.webkitScrollbar::-webkit-scrollbar-thumb{
+    /*width: 10px;*/
+    height: 20px;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: rgba(0,0,0,.4);;
 }

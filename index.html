@@ -10,7 +10,9 @@
     <div class="editor-box">
         <div id="editor"></div>
     </div>
-    <div class="editorTipBox"></div>
+    <div class="editorTipBox">
+        <div id="editorTip"></div>
+    </div>
 </div>
 
 
@@ -40,7 +42,19 @@
             editor:null,
             gp:null,
             init(selector){
-                this.gp =  new GrammarParser({type:'lucene',publicPath:'./js'});
+                //-----解析 demo-----
+                this.gp =  new GrammarParser({
+                    type:'lucene',//语言类型
+                    //字段列表 name:字段名 type:值类型
+                    fields: {
+                        school:{type:'string'},
+                        grade:{type:'enum',enumVal:[1,2,3,4,5,6]},
+                        name:{type:'string'},
+                        sex:{type:'integer'},
+                        telephone:{type:'telephone'},
+                        email:{type:'email'}
+                    }
+                });
 
                 this.editor = ace.edit(selector);
                 this.editor.$blockScrolling = Infinity;
@@ -55,7 +69,7 @@
                     let result = this.gp.parse(content);
                     if(result.success){
                         //校验成功
-                        console.log(result.res);
+                        // console.log(result.res);
                         this.editor.getSession().setAnnotations([]);
                     }else {
                         let row = evt.end.row;

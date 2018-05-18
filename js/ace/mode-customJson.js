@@ -6,27 +6,9 @@ ace.define("ace/mode/customJson_highlight_rules", function (require, exports, mo
         this.$rules = {
             "start" : [
                 {token: 'keyword',regex: /[a-zA-Z0-9]/},
-                {token: 'symbol',regex: /[\s]+(-|&&|\|\||AND|OR|NOT)[\s]+/},
+                {token: 'symbol',regex: /[\s]+(!|&&|\|\||AND|and|OR|or|NOT|not)[\s]+/},
                 {token: 'number',regex: /:[a-zA-Z0-9\.<>]+/},
-                {token: 'notes',regex: /\/\*/,next:'notes'},
-                {token: 'string',regex: '"',next:'string'}
-            ],
-            "string":[
-                {
-                    token : "constant.language.escape",
-                    regex : /\\(?:x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|["\\\/bfnrt])/
-                }, {
-                    token : "number",
-                    regex : '[^"\\\\]+'
-                }, {
-                    token : "string",
-                    regex : '"',
-                    next  : "start"
-                }, {
-                    token : "string",
-                    regex : ":",
-                    next  : "start"
-                }
+                {token: 'notes',regex: /\/\*/,next:'notes'}
             ],
             "notes":[
                 {

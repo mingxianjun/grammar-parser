@@ -13,10 +13,11 @@ body{
 }
 
 .editorTipBox{
+    position: relative;
     float: right;
     width: 580px;
     height: 400px;
-    padding: 0 20px 20px 10px;
+    padding: 40px 1rem 20px 5px;
     overflow-y: auto;
     background: #3d3d3d;
     border-radius: 2px 0 0 2px;
@@ -54,16 +55,39 @@ body{
 }
 
 .editor-box{
+    position: relative;
     float: left;
     width: 600px;
     height: 400px;
     z-index: 2;
     background: #363636;
-    padding: 20px 1rem 20px 5px;
+    padding: 40px 1rem 20px 5px;
     border-radius: 2px;
 }
+.editorTipBox:before,.editor-box:before{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+    background: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+.editorTipBox:before{
+    content: 'output';
+    color: chocolate;
+}
+.editor-box:before{
+    content: 'input';
+    color: green;
+}
 
-#editor{
+#editor,#editorOut{
     height: 100%;
     font-size: 16px;
     background: transparent;

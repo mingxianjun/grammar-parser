@@ -11,7 +11,7 @@
         <div id="editor"></div>
     </div>
     <div class="editorTipBox">
-        <div id="editorTip"></div>
+        <div id="editorOut"></div>
     </div>
 </div>
 
@@ -21,6 +21,7 @@
 <script src="js/grammar/grammar.parser.min.js"></script>
 <script src="js/ace/ace.js"></script>
 <script src="js/ace/ext-language_tools.js"></script>
+
 <script>
     let app = angular.module('mainApp',[]);
 
@@ -28,8 +29,15 @@
     app.controller('mainCtr',function ($scope,editorUtil) {
         $scope.editorMode = {
             editor:null,
+            outEditor:null,
             init(){
                 this.editor = editorUtil.init('editor');
+                this.initOutEditor();
+            },
+            initOutEditor(){
+                this.outEditor = ace.edit('editorOut');
+                this.outEditor.getSession().setMode('ace/mode/json');
+                this.outEditor.setReadOnly(true);
             }
         };
 

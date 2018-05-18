@@ -3,9 +3,13 @@ ace.define("ace/mode/customJson_highlight_rules", function (require, exports, mo
     var oop = require("../lib/oop");
     var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
     var DroolsHighlightRules = function () {
+        let keywordMapper = this.createKeywordMapper({
+            "keyword":
+                "school|grade|name|sex|telephone|email"
+        }, "identifier");
         this.$rules = {
             "start" : [
-                {token: 'keyword',regex: /[a-zA-Z0-9]/},
+                {token : keywordMapper,regex : "[a-zA-Z_$][a-zA-Z0-9_$]*\\b"},
                 {token: 'symbol',regex: /[\s]+(!|&&|\|\||AND|and|OR|or|NOT|not)[\s]+/},
                 {token: 'number',regex: /:[a-zA-Z0-9\.<>]+/},
                 {token: 'notes',regex: /\/\*/,next:'notes'}

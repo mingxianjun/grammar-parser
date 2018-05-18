@@ -131,7 +131,7 @@ body{
 .ace-tm .ace_marker-layer .ace_active-line {
     background: rgba(255, 255, 255, .07);
 }
-.ace_keyword{color: #5fdfff!important;}
+.ace_keyword{color: #20ff82 !important;}
 .ace_number{color: #fffd64!important;}
 .ace_string{color: #FFF!important;}
 .ace_symbol{color: #ff3c82;}

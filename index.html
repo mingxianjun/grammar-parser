@@ -17,9 +17,9 @@
 
 
 <script src="http://lib.baomitu.com/jquery/2.2.4/jquery.js"></script>
+<script src="js/grammar/grammar.parser.min.js"></script>
 <script src="js/angular.min.js"></script>
 <script src="js/service.js"></script>
-<script src="js/grammar/grammar.parser.min.js"></script>
 <script src="js/ace/ace.js"></script>
 <script src="js/ace/ext-language_tools.js"></script>
 
@@ -27,10 +27,10 @@
     app.controller('mainCtr',function ($scope,editorUtil) {
         $scope.editorMode = {
             editor:null,
-            type:'',
+            type:'student',
             outEditor:null,
             init(){
-                this.editor = editorUtil.init('editor');
+                this.editor = editorUtil.init('editor',this.type);
                 this.initOutEditor();
             },
             initOutEditor(){
@@ -42,18 +42,6 @@
 
         $scope.editorMode.init();
     });
-    const autoList = {
-        student:{
-            statics:[
-                {meta:'学校名称',value:'school'},
-                {meta:'年级',value:'grade'},
-                {meta:'姓名',value:'name'},
-                {meta:'性别',value:'sex'},
-                {meta:'电话',value:'telephone'},
-                {meta:'邮箱',value:'email'}
-            ]
-        }
-    }
 </script>
 </body>
 </html>

@@ -24,11 +24,13 @@ app.service('editorUtil',function () {
             let editorSession = this.editor.getSession();
             editorSession.setMode('ace/mode/customJson');
             //示例数据
+            editorSession.setValue(tipsList[type]);
 
             //补全提示
             let autoList = autoListMap[type];
             let langTools = ace.require("ace/ext/language_tools");
-            langTools.addCompleter({
+            let _this = this;
+            langTools.setCompleters([{
                 getCompletions(editor,session,pos,prefix,callback,e){
                     let content = session.doc.$lines.join(''),index = pos.column;
                     for(let i=0;i<pos.row;i++){
@@ -37,14 +39,14 @@ app.service('editorUtil',function () {
                     if(!content || !(content.replace(/\s/g,'')))
                         return callback(null,autoList.statics);
                     else{
-                        let key = this.getKey(content,prefix,index);
+                        let key = _this.getKey(content,prefix,index);
                         if(key)
                             return callback(null,autoList.relation && autoList.relation[key] || []);
                         else
                             return callback(null,autoList.statics);
                     }
                 }
-            });
+            }]);
 
             editorSession.on('change',(evt,session) => {
                 let content = session.doc.$lines.join('\n');
@@ -70,7 +72,7 @@ app.service('editorUtil',function () {
                 let kl = this.findChar(line,':',quoIndex.s,-1);
                 key = this.findObjectKey(line.substring(0,kl));
             }
-            return key.replace(/\"/g,'') || '';
+            return key && key.replace(/\"/g,'') || '';
         },
         findChar(str,key,i,next){
             if(str.charAt(i) === key) return i;
@@ -79,7 +81,7 @@ app.service('editorUtil',function () {
                 return -1;
         },
         findObjectKey(str,notKey){
-            let breakReg = /[\{}:,;\s\/\(\)\|&]/,key = '',strs = str.splice('');
+            let breakReg = /[\{}:,;\s\/\(\)\|&]/,key = '',strs = str.split('');
             for (let i=strs.length-1;i>=0;i--){
                 if(breakReg.test(strs[i])) break;
                 if(notKey && strs[i] == notKey) break;
@@ -118,12 +120,12 @@ app.service('editorUtil',function () {
 const autoListMap = {
     student:{
         statics:[
-            {meta:'学校名称',caption:'',value:'school'},
-            {meta:'年级',caption:'',value:'grade'},
-            {meta:'姓名',value:'name'},
-            {meta:'性别',value:'sex'},
-            {meta:'电话',value:'telephone'},
-            {meta:'邮箱',value:'email'}
+            {meta:'学校名称',caption:'school',value:'school:""'},
+            {meta:'年级',caption:'grade',value:'grade:""'},
+            {meta:'姓名',caption:'name',value:'name:""'},
+            {meta:'性别',caption:'sex',value:'sex:""'},
+            {meta:'电话',caption:'telephone',value:'telephone:""'},
+            {meta:'邮箱',caption:'email',value:'email:""'}
         ]
     }
 };

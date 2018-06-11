@@ -1,7 +1,7 @@
 @charset "UTF-8";
 *{margin: 0;padding: 0;box-sizing: border-box;}
 body{
-    background: #fafafa;
+    background: rgba(76, 175, 80, 0.48);
     font-family: "Microsoft YaHei",sans-serif;
     font-size: 14px;
 }
@@ -16,8 +16,8 @@ body{
     position: relative;
     float: right;
     width: 580px;
-    height: 400px;
-    padding: 40px 1rem 20px 5px;
+    height: 600px;
+    padding: 40px 1rem 10px 5px;
     overflow-y: auto;
     background: #3d3d3d;
     border-radius: 2px 0 0 2px;
@@ -58,10 +58,10 @@ body{
     position: relative;
     float: left;
     width: 600px;
-    height: 400px;
+    height: 600px;
     z-index: 2;
     background: #363636;
-    padding: 40px 1rem 20px 5px;
+    padding: 40px 1rem 10px 5px;
     border-radius: 2px;
 }
 .editorTipBox:before,.editor-box:before{
@@ -79,7 +79,7 @@ body{
     box-sizing: border-box;
 }
 .editorTipBox:before{
-    content: 'output';
+    content: 'parse result';
     color: chocolate;
 }
 .editor-box:before{
@@ -133,9 +133,10 @@ body{
 }
 .ace_keyword{color: #20ff82 !important;}
 .ace_number{color: #fffd64!important;}
-.ace_string{color: #FFF!important;}
+.ace-tm .ace_variable {color: #CDDC39!important;}
+.editor-box .ace_string{color: #FFF!important;}
+.editorTipBox .ace_string{color: #4CAF50!important;}
 .ace_symbol{color: #ff3c82;}
-.editorBox .ace_string{color: #fff!important;}
 .ace_notes{
     color: #abada6!important;
     font-family: Monaco, Menlo, "Ubuntu Mono", Consolas, "Microsoft YaHei";

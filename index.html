@@ -32,11 +32,23 @@
             init(){
                 this.editor = editorUtil.init('editor',this.type);
                 this.initOutEditor();
+
+                window._parseResultChange = new Proxy({}, {
+                    get: function (t, p) {
+                        return t[p];
+                    },
+                    set: function (t, p, v) {
+                        $scope.editorMode.outEditor.getSession().setValue(JSON.stringify(v,null,2));
+                        return true;
+                    }
+                });
+
             },
             initOutEditor(){
                 this.outEditor = ace.edit('editorOut');
                 this.outEditor.getSession().setMode('ace/mode/json');
                 this.outEditor.setReadOnly(true);
+                this.outEditor.setOptions({wrap:'free'});
             }
         };
 

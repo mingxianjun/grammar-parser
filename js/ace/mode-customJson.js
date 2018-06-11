@@ -11,7 +11,7 @@ ace.define("ace/mode/customJson_highlight_rules", function (require, exports, mo
             "start" : [
                 {token : keywordMapper,regex : "[a-zA-Z_$][a-zA-Z0-9_$]*\\b"},
                 {token: 'symbol',regex: /[\s]+(!|&&|\|\||AND|and|OR|or|NOT|not)[\s]+/},
-                {token: 'number',regex: /:[a-zA-Z0-9\.<>]+/},
+                {token: 'number',regex: /[0-9]+/},
                 {token: 'notes',regex: /\/\*/,next:'notes'}
             ],
             "notes":[

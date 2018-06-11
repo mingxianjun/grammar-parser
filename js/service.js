@@ -53,13 +53,14 @@ app.service('editorUtil',function () {
                 let result = this.gp.parse(content);
                 if(result.success){
                     //校验成功
-                    console.log(result.res);
+                    window._parseResultChange.val = result.res;
                     editorSession.setAnnotations([]);
                 }else {
                     let row = evt.end.row;
                     if(evt.action !== 'insert')
                         row = evt.start.row;
                     this.showErrorInfo(result.error,row);
+                    window._parseResultChange.val = 'parse error!';
                 }
             });
 

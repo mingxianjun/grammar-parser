@@ -10,9 +10,10 @@ app.service('editorUtil',function () {
                 //字段列表 name:字段名 type:值类型
                 fields: {
                     school:{type:'string'},
-                    grade:{type:'enum',enumVal:[1,2,3,4,5,6]},
+                    grade:{type:'enum',enumVal:['1','2','3','4','5','6']},
                     name:{type:'string'},
-                    sex:{type:'integer'},
+                    sex:{type:'string'},
+                    age:{type:'integer'},
                     telephone:{type:'telephone'},
                     email:{type:'email'}
                 }
@@ -125,6 +126,7 @@ const autoListMap = {
             {meta:'年级',caption:'grade',value:'grade:""'},
             {meta:'姓名',caption:'name',value:'name:""'},
             {meta:'性别',caption:'sex',value:'sex:""'},
+            {meta:'年龄',caption:'age',value:'age:""'},
             {meta:'电话',caption:'telephone',value:'telephone:""'},
             {meta:'邮箱',caption:'email',value:'email:""'}
         ]

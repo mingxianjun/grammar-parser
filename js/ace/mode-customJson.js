@@ -5,7 +5,7 @@ ace.define("ace/mode/customJson_highlight_rules", function (require, exports, mo
     var DroolsHighlightRules = function () {
         let keywordMapper = this.createKeywordMapper({
             "keyword":
-                "school|grade|name|sex|telephone|email"
+                "school|grade|name|sex|age|telephone|email"
         }, "identifier");
         this.$rules = {
             "start" : [

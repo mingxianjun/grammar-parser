@@ -49,6 +49,7 @@
                 this.outEditor.getSession().setMode('ace/mode/json');
                 this.outEditor.setReadOnly(true);
                 this.outEditor.setOptions({wrap:'free'});
+                this.outEditor.$blockScrolling = Infinity;
             }
         };
 
